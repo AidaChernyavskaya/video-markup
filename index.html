@@ -7,13 +7,31 @@
     <link rel="stylesheet" href="./sass/style.css">
 </head>
 <body>
-    <main>
-        <div class="container">
-            <section class="section-video margin-bottom-20px">
-                <video class="video-file" controls src="./video/land-of-ice.mp4"></video>
-            </section>
-            <section class="section-data"></section>
-        </div>
-    </main>
+    <div class="container">
+        <section class="section-video margin-bottom-20px">
+            <video class="video-player" controls src="./video/land-of-ice.mp4"></video>
+        </section>
+        <section class="section-data">
+            <div class="data">
+                <div class="arrow">
+                    <div class="arrow__triangle arrow__triangle_left arrow__empty"></div>
+                </div>
+                <div class="data-container">
+                    <div class="mood-columns">
+                        <div class="mood-columns__piece mood-columns__piece_level-2 mood-columns__piece_anger"></div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__passed"></div>
+                        <div class="progress-bar__cursor"></div>
+                    </div>
+                    <div class="time-line"></div>
+                </div>
+                <div class="arrow">
+                    <div class="arrow__triangle arrow__triangle_right arrow__full"></div>
+                </div>
+            </div>
+            <div class="legend"></div>
+        </section>
+    </div>
 </body>
 </html>

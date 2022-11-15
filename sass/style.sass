@@ -1,17 +1,96 @@
 @import "./abstracts/variables"
 @import "./base/utilites"
 @import "./base/base"
-
-.section-video
-  height: 52rem
-  border-radius: 0 0 1rem 1rem
-  overflow: hidden
+@import "./elements/video-player"
 
 .section-data
   background-color: $color-white
   width: 100%
   height: 21.3rem
   border-radius: 1rem 1rem 0 0
+  overflow: hidden
 
-.video-file
+.data
+  height: 13.3rem
+  display: flex
+  flex-direction: row
+
+.legend
+  background-color: greenyellow
+  height: 8rem
+
+.arrow
   height: 100%
+  width: 5%
+  position: relative
+  cursor: pointer
+  &__triangle
+    width: 0
+    height: 0
+    border-top: 15px solid transparent
+    border-bottom: 15px solid transparent
+    position: absolute
+    top: 5.2rem
+    left: 1.5rem
+    &_left
+      border-right: 20px solid
+    &_right
+      border-left: 20px solid
+  &__empty
+    color: $color-grey-light
+  &__full
+    color: $color-black
+
+.data-container
+  width: 90%
+  position: relative
+
+.mood-columns
+  height: 45%
+  &__piece
+    width: 1rem
+    height: 2rem
+    background-color: yellow
+    position: absolute
+    left: 9rem
+    &_level-1
+      height: $emotion-level-1
+      top: 4rem
+    &_level-2
+      height: $emotion-level-2
+      top: 2rem
+    &_level-3
+      height: $emotion-level-3
+      top: 0
+    &_happiness
+      background-color: $color-happiness
+    &_astonishment
+      background-color: $color-astonishment
+    &_fear
+      background-color: $color-fear
+    &_disgust
+      background-color: $color-disgust
+    &_anger
+      background-color: $color-anger
+    &_sadness
+      background-color: $color-sadness
+
+.progress-bar
+  background-color: $color-grey-light
+  height: 10%
+  &__passed
+    background-color: $color-blue
+    width: 33rem
+    height: 100%
+  &__cursor
+    background-color: $color-blue
+    width: 2rem
+    height: 2rem
+    border-radius: 50%
+    position: absolute
+    top: 5.6rem
+    left: 32rem
+
+
+.time-line
+  height: 45%
