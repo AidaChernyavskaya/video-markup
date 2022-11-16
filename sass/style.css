@@ -94,8 +94,6 @@ body {
 }
 .mood-columns__piece {
   width: 1rem;
-  height: 2rem;
-  background-color: yellow;
   position: absolute;
   left: 9rem;
 }
@@ -129,6 +127,14 @@ body {
 .mood-columns__piece_sadness {
   background-color: #015EAD;
 }
+.mood-columns__dotted {
+  width: 0.4rem;
+  height: 4rem;
+  position: absolute;
+  top: 2rem;
+  left: 12rem;
+  border-left: 0.4rem dotted #000000;
+}
 
 .progress-bar {
   background-color: #D9D9D9;
@@ -151,6 +157,47 @@ body {
 
 .time-line {
   height: 45%;
+  position: relative;
+}
+.time-line__pointer {
+  position: absolute;
+  top: 0;
+  left: 9.5rem;
+  width: 0.1rem;
+  height: 2rem;
+  background-color: #000000;
+}
+.time-line__pointer_start {
+  left: 0;
+  height: 4rem;
+}
+.time-line__pointer_finish {
+  left: auto;
+  right: 0;
+  height: 4rem;
+}
+.time-line__time-value {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  letter-spacing: 0.2rem;
+  color: #000000;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 2rem;
+  left: -1.5rem;
+}
+.time-line__time-value_start {
+  transform: rotate(0);
+  font-size: 1.2rem;
+  left: -9.7rem;
+  top: 4.3rem;
+}
+.time-line__time-value_finish {
+  transform: rotate(0);
+  font-size: 1.2rem;
+  left: 70.2rem;
+  top: 4.3rem;
 }
 
 /*# sourceMappingURL=style.css.map */
