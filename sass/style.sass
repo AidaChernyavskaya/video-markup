@@ -8,16 +8,12 @@
   width: 100%
   height: 21.3rem
   border-radius: 1rem 1rem 0 0
-  overflow: hidden
+  //overflow: hidden
 
 .data
   height: 13.3rem
   display: flex
   flex-direction: row
-
-.legend
-  background-color: greenyellow
-  height: 8rem
 
 .arrow
   height: 100%
@@ -78,7 +74,7 @@
     position: absolute
     top: 2rem
     left: 12rem
-    border-left: .4rem dotted $color-black
+    border-left: .4rem dashed $color-black
 
 .progress-bar
   background-color: $color-grey-light
@@ -120,18 +116,71 @@
     line-height: 1.2rem
     letter-spacing: .2rem
     color: $color-black
-    transform: rotate(-45deg)
+    //transform: rotate(-45deg)
     position: absolute
     top: 2rem
     left: -1.5rem
     &_start
-      transform: rotate(0)
+      //transform: rotate(0)
       font-size: 1.2rem
       left: -9.7rem
       top: 4.3rem
     &_finish
-      transform: rotate(0)
+      //transform: rotate(0)
       font-size: 1.2rem
       left: 70.2rem
       top: 4.3rem
 
+.legend
+  height: 8rem
+  &__container
+    width: 14rem
+    height: 4rem
+    &_string
+      display: flex
+      flex-direction: row
+  &__bar
+    width: 4rem
+    height: .5rem
+    margin: .65rem .5rem 0 0
+    &_dotted
+      border-bottom: .4rem dashed $color-black
+    &_question
+      background-color: $color-blue
+      position: relative
+      &_mark
+        height: 100%
+        width: .6rem
+        background-color: $color-black
+        position: absolute
+        top: 0
+        left: 50%
+        transform: translateX(-50%)
+
+.row-1
+  height: 30%
+
+.row-2
+  height: 70%
+  display: flex
+  justify-content: space-around
+  flex-direction: row
+
+.icon
+  text-align: center
+  &__img
+    width: 2.8rem
+    height: 2.8rem
+    cursor: pointer
+
+.label
+  width: 11rem
+  height: 3rem
+  background-color: rgba($color-grey-light, .8)
+  border-radius: 1rem 1rem 1rem 0
+  position: absolute
+  top: -.8rem
+  left: 10rem
+  &__text
+    text-align: center
+    transform: translateY(40%)
