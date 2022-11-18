@@ -28,6 +28,7 @@ body {
   letter-spacing: 0;
   background-color: #DFF6FF;
   padding: 0 30.6rem;
+  height: 100vh;
 }
 
 .section-video {
@@ -44,7 +45,6 @@ body {
 .section-data {
   background-color: #ffffff;
   width: 100%;
-  height: 21.3rem;
   border-radius: 1rem 1rem 0 0;
 }
 
@@ -94,6 +94,17 @@ body {
   width: 1rem;
   position: absolute;
   left: 9rem;
+  opacity: 0.9;
+  transition: all 0.3s ease-out;
+}
+.mood-columns__piece:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+.mood-columns__piece:hover ~ .label, .mood-columns__piece:hover ~ .time-pointer {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
 }
 .mood-columns__piece_level-1 {
   height: 2rem;
@@ -153,6 +164,27 @@ body {
   left: 32rem;
 }
 
+.time-pointer {
+  width: 0.1rem;
+  height: 2rem;
+  background-color: #000000;
+  position: absolute;
+  top: 7.3rem;
+  left: 9.5rem;
+  visibility: hidden;
+  opacity: 0;
+}
+.time-pointer__time-value {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  letter-spacing: 0.2rem;
+  color: #000000;
+  position: absolute;
+  top: 2rem;
+  left: -1.5rem;
+}
+
 .time-line {
   height: 45%;
   position: relative;
@@ -186,17 +218,18 @@ body {
 }
 .time-line__time-value_start {
   font-size: 1.2rem;
-  left: -9.7rem;
+  left: 0;
   top: 4.3rem;
 }
 .time-line__time-value_finish {
   font-size: 1.2rem;
-  left: 70.2rem;
+  left: auto;
+  right: -0.5rem;
   top: 4.3rem;
 }
 
 .legend {
-  height: 8rem;
+  height: 7.6rem;
 }
 .legend__container {
   width: 14rem;
@@ -251,15 +284,17 @@ body {
 .label {
   width: 11rem;
   height: 3rem;
-  background-color: rgba(217, 217, 217, 0.8);
+  background-color: rgba(217, 217, 217, 0.9);
   border-radius: 1rem 1rem 1rem 0;
   position: absolute;
   top: -0.8rem;
   left: 10rem;
+  opacity: 0;
+  visibility: hidden;
 }
 .label__text {
   text-align: center;
-  transform: translateY(40%);
+  transform: translateY(30%);
 }
 
 /*# sourceMappingURL=style.css.map */
