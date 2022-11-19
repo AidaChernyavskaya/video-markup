@@ -27,11 +27,13 @@
     border-bottom: 15px solid transparent
     position: absolute
     top: 5.2rem
-    left: 1.5rem
+    color: $color-black
     &_left
       border-right: 20px solid
+      right: 1.5rem
     &_right
       border-left: 20px solid
+      left: 1.5rem
   &__empty
     color: $color-grey-light
   &__full
@@ -50,7 +52,7 @@
     opacity: .9
     transition: all .3s ease-out
     &:hover
-      transform: scale(1.1)
+      transform: scale(1.04)
       opacity: 1
       ~.label, ~.time-pointer
         visibility: visible
@@ -118,7 +120,8 @@
     color: $color-black
     position: absolute
     top: 2rem
-    left: -1.5rem
+    left: 0
+    transform: translateX(-50%)
 
 .time-line
   height: 45%
@@ -193,6 +196,8 @@
   display: flex
   justify-content: space-around
   flex-direction: row
+  &_none
+    display: none
 
 .icon
   text-align: center
@@ -200,17 +205,52 @@
     width: 2.8rem
     height: 2.8rem
     cursor: pointer
+  &__expand
+    display: none
+  &__collapse
+    //display: flex
 
 .label
   width: 11rem
   height: 3rem
-  background-color: rgba($color-grey-light, .9)
+  background-color: rgba($color-grey-light, .95)
   border-radius: 1rem 1rem 1rem 0
   position: absolute
-  top: -.8rem
+  //top: -.8rem
   left: 10rem
   opacity: 0
   visibility: hidden
+  z-index: 100
   &__text
     text-align: center
     transform: translateY(30%)
+
+@media (max-width: 1450px)
+  body
+    padding: 0 25rem
+
+@media (max-width: 1350px)
+  body
+    padding: 0 20rem
+
+@media (max-width: 1250px)
+  body
+    padding: 0 15rem
+
+@media (max-width: 1150px)
+  body
+    padding: 0 10rem
+
+@media (max-width: 1050px)
+  body
+    padding: 0 5rem
+
+@media (max-width: 950px)
+  body
+    padding: 0
+  .arrow
+    &__triangle
+      &_left
+        right: .5rem
+      &_right
+        left: .5rem
