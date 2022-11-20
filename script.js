@@ -49,6 +49,9 @@ function toRight(){
     drawDataSection(data[current]);
     updateButtonState();
 
+    let video = document.getElementById('video-player');
+    timeUpdateListener(Math.round(video.currentTime));
+
     console.log("check right");
 }
 
@@ -57,6 +60,9 @@ function toLeft(){
     clearMoodColumns();
     drawDataSection(data[current]);
     updateButtonState();
+
+    let video = document.getElementById('video-player');
+    timeUpdateListener(Math.round(video.currentTime));
 
     console.log("check left");
 }
@@ -124,6 +130,7 @@ function createLabel(moodContainer, emotion, intervalStart){
 
 function createTimePointer(moodContainer, emotion, intervalStart){
     let left = (emotion.start - intervalStart) * 100 / 300;
+    let width = (emotion.finish - emotion.start) * 100 / 300;
     if(left !==0 && left !== 100){
         let timePointer = document.createElement('div');
         timePointer.classList.add('time-pointer');
@@ -131,10 +138,29 @@ function createTimePointer(moodContainer, emotion, intervalStart){
 
         let timeValue = document.createElement('p');
         timeValue.classList.add('time-pointer__time-value');
+        if (left > 90){
+            timeValue.style.transform = 'translateX(-100%)';
+        }
         timeValue.innerHTML = secondsToStr(emotion.start);
         timePointer.appendChild(timeValue);
 
         moodContainer.appendChild(timePointer);
+    }
+
+    if (width > 15 && (left + width !== 100) || left === 0){
+        let timePointerEnd = document.createElement('div');
+        timePointerEnd.classList.add('time-pointer');
+        timePointerEnd.style.left = `${left + width}%`;
+
+        let timeValueEnd = document.createElement('p');
+        timeValueEnd.classList.add('time-pointer__time-value');
+        if (left !== 0){
+            timeValueEnd.style.transform = 'translateX(-100%)';
+        }
+        timeValueEnd.innerHTML = secondsToStr(emotion.finish);
+        timePointerEnd.appendChild(timeValueEnd);
+
+        moodContainer.appendChild(timePointerEnd);
     }
 }
 
@@ -146,8 +172,7 @@ function secondsToStr(seconds){
     let h = Math.floor(seconds / 3600);
     let m = Math.floor(seconds % 3600 / 60);
     let s = Math.floor(seconds % 3600 % 60);
-    let result = `${FormatNumberLength(h, 2)}:${FormatNumberLength(m, 2)}:${FormatNumberLength(s, 2)}`
-    return result;
+    return `${FormatNumberLength(h, 2)}:${FormatNumberLength(m, 2)}:${FormatNumberLength(s, 2)}`;
 }
 
 function FormatNumberLength(num, length) {
@@ -187,23 +212,60 @@ function init_events_handlers(){
     document.getElementById('arrow_right').onclick = toRight;
     document.getElementById('arrow_left').onclick = toLeft;
     document.getElementById('iconLegend').onclick = showLegend;
+
+    let video = document.getElementById('video-player');
+    video.addEventListener('timeupdate', function () {
+        timeUpdateListener(Math.round(video.currentTime));
+    })
+
 }
 
 document.addEventListener("DOMContentLoaded", html_ready);
-/*
-* загрузка:
-* загурзить данные result.json
-* получить первый объект из массива
-* отрисовать
-*
-*
-* кнопка вправо:
-* получить следующий объект
-* отрисовать его
-* обновить состояние кнопок
-*
-* кнопка влево:
-* получить предыдущий объект
-* отрисовать его
-* обновить состояние кнопок
-* */
+
+function drawProgressBar(second){
+    let progressBar = document.querySelector('.progress-bar');
+    let progressBarPassed = document.querySelector('.progress-bar__passed');
+    let progressBarCursor = document.querySelector('.progress-bar__cursor');
+
+    clearProgressBar();
+    progressBarPassed.style.width = (second * 100) / 300 + '%';
+    progressBarCursor.style.display = 'block';
+    progressBarCursor.style.left = (second * 100) / 300 + '%';
+
+}
+
+function clearProgressBar(){
+    // let progressBar = document.querySelector('.progress-bar');
+    let progressBarPassed = document.querySelector('.progress-bar__passed');
+    let progressBarCursor = document.querySelector('.progress-bar__cursor');
+
+    progressBarPassed.style.width = '0';
+    progressBarCursor.style.display = 'none';
+}
+
+
+function timeUpdateListener(currentSecond){
+    let period = calculatePeriod(currentSecond);
+    let progressBarPassed = document.querySelector('.progress-bar__passed');
+    let progressBarCursor = document.querySelector('.progress-bar__cursor');
+    let second_of_period = calculateSecondOfPeriod(currentSecond, period);
+
+    if (period === current){
+        drawProgressBar(second_of_period);
+    } else if (period > current) {
+        progressBarPassed.style.width = '100%';
+        progressBarCursor.style.display = 'none';
+    } else if (period < current) {
+        progressBarPassed.style.width = '0%';
+        progressBarCursor.style.display = 'none';
+    }
+
+}
+
+function calculatePeriod(currentSecond){
+    return Math.floor(currentSecond / 300);
+}
+
+function calculateSecondOfPeriod(currentSecond, period){
+    return currentSecond - (300 * period);
+}
