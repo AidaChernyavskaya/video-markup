@@ -1,6 +1,8 @@
 
 let data = [];
 let current = 0;
+let activeCurrent = 0;
+let flag = true;
 
 const level_map = {
     1: 'mood-columns__piece_level-1',
@@ -216,8 +218,19 @@ function init_events_handlers(){
     let video = document.getElementById('video-player');
     video.addEventListener('timeupdate', function () {
         timeUpdateListener(Math.round(video.currentTime));
+    });
+
+    let checkBox = document.getElementById('flipping');
+    checkBox.addEventListener('change', function (){
+        updateFlagState();
+        console.log(flag)
     })
 
+}
+
+function updateFlagState(){
+    flag = !flag;
+    return flag;
 }
 
 document.addEventListener("DOMContentLoaded", html_ready);
@@ -243,7 +256,6 @@ function clearProgressBar(){
     progressBarCursor.style.display = 'none';
 }
 
-
 function timeUpdateListener(currentSecond){
     let period = calculatePeriod(currentSecond);
     let progressBarPassed = document.querySelector('.progress-bar__passed');
@@ -252,13 +264,22 @@ function timeUpdateListener(currentSecond){
 
     if (period === current){
         drawProgressBar(second_of_period);
+        activeCurrent = current;
     } else if (period > current) {
         progressBarPassed.style.width = '100%';
         progressBarCursor.style.display = 'none';
+        if (current === activeCurrent && flag){
+            toRight();
+        }
     } else if (period < current) {
         progressBarPassed.style.width = '0%';
         progressBarCursor.style.display = 'none';
     }
+
+    /*
+    * Если current == active_current => мы листаем
+    * Если current != active_current => do nothing
+    * */
 
 }
 

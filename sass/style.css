@@ -40,6 +40,7 @@ body {
 .video-player {
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }
 
 .section-data {
@@ -337,6 +338,15 @@ body {
   .arrow__triangle_right {
     left: 0.5rem;
   }
+}
+.section-checkBox {
+  height: 2rem;
+  display: flex;
+  justify-content: right;
+  padding-right: 1rem;
+}
+.section-checkBox input {
+  margin-right: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */
