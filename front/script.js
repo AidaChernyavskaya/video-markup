@@ -275,12 +275,6 @@ function timeUpdateListener(currentSecond){
         progressBarPassed.style.width = '0%';
         progressBarCursor.style.display = 'none';
     }
-
-    /*
-    * Если current == active_current => мы листаем
-    * Если current != active_current => do nothing
-    * */
-
 }
 
 function calculatePeriod(currentSecond){
