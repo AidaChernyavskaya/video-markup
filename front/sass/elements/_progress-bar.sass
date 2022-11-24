@@ -1,0 +1,77 @@
+@import "../abstracts/variables"
+
+.progress-bar
+  background-color: $color-grey-light
+  height: 10%
+  &__passed
+    background-color: $color-blue
+    width: 0
+    height: 100%
+  &__cursor
+    background-color: $color-blue
+    width: 2rem
+    height: 2rem
+    border-radius: 50%
+    position: absolute
+    top: 5.6rem
+    left: 0
+    transform: translateX(-50%)
+
+.time-pointer
+  width: .1rem
+  height: 2rem
+  background-color: $color-black
+  position: absolute
+  top: 7.3rem
+  left: 9.5rem
+  visibility: hidden
+  opacity: 0
+  &__time-value
+    font-weight: 400
+    font-size: 1rem
+    line-height: 1.2rem
+    letter-spacing: .2rem
+    color: $color-black
+    position: absolute
+    top: 2rem
+    left: auto
+//transform: translateX(-50%)
+
+.time-line
+  height: 45%
+  position: relative
+  &__pointer
+    position: absolute
+    top: 0
+    left: 9.5rem
+    width: .1rem
+    height: 2rem
+    background-color: $color-black
+    &_start
+      left: 0
+      height: 4rem
+    &_finish
+      left: auto
+      right: 0
+      height: 4rem
+  &__time-value
+    font-weight: 400
+    font-size: 1rem
+    line-height: 1.2rem
+    letter-spacing: .2rem
+    color: $color-black
+    //transform: rotate(-45deg)
+    position: absolute
+    top: 2rem
+    left: -1.5rem
+    &_start
+      //transform: rotate(0)
+      font-size: 1.2rem
+      left: 0
+      top: 4.3rem
+    &_finish
+      //transform: rotate(0)
+      font-size: 1.2rem
+      left: auto
+      right: -.5rem
+      top: 4.3rem

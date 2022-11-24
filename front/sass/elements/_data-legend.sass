@@ -1,0 +1,45 @@
+.legend
+  //height: 7.6rem
+  &__container
+    width: 14rem
+    height: 4rem
+    &_string
+      display: flex
+      flex-direction: row
+  &__bar
+    width: 4rem
+    height: .5rem
+    margin: .65rem .5rem 0 0
+    &_dotted
+      border-bottom: .4rem dashed $color-black
+    &_question
+      background-color: $color-blue
+      position: relative
+      &_mark
+        height: 100%
+        width: .6rem
+        background-color: $color-black
+        position: absolute
+        top: 0
+        left: 50%
+        transform: translateX(-50%)
+
+.row-1
+  height: 30%
+
+.row-2
+  height: 70%
+  display: flex
+  justify-content: space-around
+  flex-direction: row
+  &_none
+    display: none
+
+.icon
+  text-align: center
+  &__img
+    width: 2.8rem
+    height: 2.8rem
+    cursor: pointer
+  &__expand
+    display: none

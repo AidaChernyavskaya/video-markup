@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <title>Video markup</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="sass/style.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="../sass/style.css">
+    <script src="../scripts/global-data.js"></script>
+    <script src="../scripts/events-handlers.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/page-rendering.js"></script>
+    <script src="../scripts/elements-clearing.js"></script>
+    <script src="../scripts/utils.js"></script>
+    <script src="../scripts/video-handlers.js"></script>
+    <script src="../scripts/main.js"></script>
 </head>
 <body>
     <div class="container">
         <section class="section-video " id="section-video">
-            <video class="video-player" id="video-player" controls src="./video/land-of-ice.mp4"></video>
+            <video class="video-player" id="video-player" controls src="../../video/land-of-ice.mp4"></video>
         </section>
         <section class="section-checkBox">
             <input type="checkbox" id="flipping" name="flipping" checked>
@@ -58,8 +65,8 @@
             <div class="legend">
                 <div class="row-1 margin-bottom-5px">
                     <div class="icon" id="iconLegend">
-                        <img src="./images/icon-minus.png" alt="" class="icon__img icon__collapse" id="icon-minus">
-                        <img src="./images/icon-plus.png" alt="" class="icon__img icon__expand" id="icon-plus">
+                        <img src="../images/icon-minus.png" alt="" class="icon__img icon__collapse" id="icon-minus">
+                        <img src="../images/icon-plus.png" alt="" class="icon__img icon__expand" id="icon-plus">
                     </div>
                 </div>
                 <div class="row-2" id="legend">

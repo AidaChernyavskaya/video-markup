@@ -1,0 +1,25 @@
+@import "../abstracts/variables"
+
+.arrow
+  height: 100%
+  width: 5%
+  position: relative
+  cursor: pointer
+  &__triangle
+    width: 0
+    height: 0
+    border-top: 15px solid transparent
+    border-bottom: 15px solid transparent
+    position: absolute
+    top: 5.2rem
+    color: $color-black
+    &_left
+      border-right: 20px solid
+      right: 1.5rem
+    &_right
+      border-left: 20px solid
+      left: 1.5rem
+  &__empty
+    color: $color-grey-light
+  &__full
+    color: $color-black

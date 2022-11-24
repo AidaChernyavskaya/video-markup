@@ -1,0 +1,65 @@
+@import "../abstracts/variables"
+
+.data-container
+  width: 90%
+  position: relative
+
+.mood-columns
+  height: 45%
+  &__piece
+    width: 1rem
+    position: absolute
+    left: 9rem
+    opacity: .9
+    transition: all .3s ease-out
+    &:hover
+      transform: scale(1.04)
+      opacity: 1
+      ~.label, ~.time-pointer
+        visibility: visible
+        opacity: 1
+        transition: opacity .3s ease-out
+    &_level-1
+      height: $emotion-level-1
+      top: 4rem
+    &_level-2
+      height: $emotion-level-2
+      top: 2rem
+    &_level-3
+      height: $emotion-level-3
+      top: 0
+    &_happiness
+      background-color: $color-happiness
+    &_astonishment
+      background-color: $color-astonishment
+    &_fear
+      background-color: $color-fear
+    &_disgust
+      background-color: $color-disgust
+    &_anger
+      background-color: $color-anger
+    &_sadness
+      background-color: $color-sadness
+  &__dotted
+    width: .4rem
+    height: 4rem
+    position: absolute
+    top: 2rem
+    left: 12rem
+    border-left: .4rem dashed $color-black
+
+
+.label
+  width: 11rem
+  height: 3rem
+  background-color: rgba($color-grey-light, .95)
+  border-radius: 1rem 1rem 1rem 0
+  position: absolute
+  //top: -.8rem
+  left: 10rem
+  opacity: 0
+  visibility: hidden
+  z-index: 100
+  &__text
+    text-align: center
+    transform: translateY(30%)
