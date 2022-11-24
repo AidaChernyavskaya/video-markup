@@ -236,7 +236,7 @@ function updateFlagState(){
 document.addEventListener("DOMContentLoaded", html_ready);
 
 function drawProgressBar(second){
-    let progressBar = document.querySelector('.progress-bar');
+    // let progressBar = document.querySelector('.progress-bar');
     let progressBarPassed = document.querySelector('.progress-bar__passed');
     let progressBarCursor = document.querySelector('.progress-bar__cursor');
 
