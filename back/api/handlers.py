@@ -1,10 +1,11 @@
+
 from datetime import datetime
 from typing import List
 
 from fastapi import APIRouter, UploadFile, File
-import aiofiles
-from api.contracts import responses, requests
 
+from api.contracts import responses, requests
+from app.services.uploader import VideoUploader, CSVUploader
 
 records_router = APIRouter(tags=["records"])
 loader_router = APIRouter(tags=["loader"])
@@ -52,17 +53,13 @@ async def create_record(record: requests.RecordCreate):
     }
 
 
-@loader_router.post("/video/", response_model=responses.LoadedFile, summary="Загрузить видео")
+@loader_router.post("/upload/video/", response_model=responses.LoadedFile, summary="Загрузить видео")
 async def upload_video(video: UploadFile = File(description="Video")):
-    print(video)
-    return {"path": "abc"}
+    path = await VideoUploader().upload(video)
+    return responses.LoadedFile(path=path)
 
 
-@loader_router.post("/csv/", response_model=responses.LoadedFile, summary="Загрузить csv")
+@loader_router.post("/upload/csv/", response_model=responses.LoadedFile, summary="Загрузить csv")
 async def upload_csv(csv: UploadFile = File(description="CSV")):
-    print(csv)
-    file = '/media/csv/tmp.csv'
-    async with aiofiles.open(file, 'wb') as out_file:
-        content = await csv.read()
-        await out_file.write(content)
-    return {"path": "abc"}
+    path = await CSVUploader().upload(csv)
+    return responses.LoadedFile(path=path)
