@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 
 from fastapi import APIRouter, UploadFile, File
-
+import aiofiles
 from api.contracts import responses, requests
 
 
@@ -59,6 +59,10 @@ async def upload_video(video: UploadFile = File(description="Video")):
 
 
 @loader_router.post("/csv/", response_model=responses.LoadedFile, summary="Загрузить csv")
-async def upload_video(periods: UploadFile = File(description="Video")):
-    print(periods)
+async def upload_csv(csv: UploadFile = File(description="CSV")):
+    print(csv)
+    file = '/media/csv/tmp.csv'
+    async with aiofiles.open(file, 'wb') as out_file:
+        content = await csv.read()
+        await out_file.write(content)
     return {"path": "abc"}

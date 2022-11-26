@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  back:
+    image: video-markup
+    container_name: video-markup
+    build:
+      context: ./back/
+      dockerfile: ./Docker.dockerfile
+    command: sh -c "python main.py"
+    working_dir: /apps/
+    env_file:
+      - .env
+    volumes:
+      - ./back/:/apps/
+      - ./media/:/media/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+    name: mongo_data
