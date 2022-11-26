@@ -7,6 +7,7 @@ from fastapi import APIRouter, UploadFile, File
 from api.contracts import responses, requests
 from app.repo.records import RecordRepo
 from app.services.records.create import RecordCreator
+from app.services.records.listing import RecordListing
 from app.services.records.periods.processor import PeriodsProcessor
 from app.services.uploader import VideoUploader, CSVUploader
 from core.mongo import MongoWrapper
@@ -17,14 +18,12 @@ loader_router = APIRouter(tags=["loader"])
 
 @records_router.get(
     "/records/",
-    response_model=List[responses.RecordsPreviewsResponse],
+    response_model=responses.RecordsPreviewsResponse,
     summary="Получить список записей",
 )
 async def get_records_list():
-    return [
-        {"id": 1, "title": "Пациент Пеунов В.В. - депрессия", "created_at": datetime.now()},
-        {"id": 2, "title": "Пациент Чернявская А.А. - лень", "created_at": datetime.now()}
-    ]
+    listing = RecordListing(repo=RecordRepo(collection=MongoWrapper().get_collection()))
+    return await listing.get()
 
 
 @records_router.get(
@@ -52,7 +51,7 @@ async def create_record(record: requests.RecordCreateRequest):
         repo=RecordRepo(collection=MongoWrapper().get_collection()),
         periods_processor=PeriodsProcessor()
     )
-    return creator.create(record=record)
+    return await creator.create(record=record)
 
 
 @loader_router.post(

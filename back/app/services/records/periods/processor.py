@@ -9,7 +9,9 @@ import json
 
 class PeriodsProcessor:
     def process(self, csv_path: str) -> List[entries.Period]:
-        tmp = self.counting_datetime(pandas.read_csv(csv_path))
+        df = pandas.read_csv(csv_path)
+        print(df)
+        tmp = self.counting_datetime(df)
         result = self.merge_intervals(tmp)
         duration = tmp[-1].get('real_time') - tmp[0].get('real_time')
         paginated = self.do_pagintion(result, duration)
@@ -50,6 +52,7 @@ class PeriodsProcessor:
 
     def counting_datetime(self, df):
         data = df.to_dict('records')
+        # print(data)
 
         start_time = self.row_to_datetime(data[0])
         prev_time = self.row_to_datetime(data[0])
@@ -86,6 +89,7 @@ class PeriodsProcessor:
         return final
 
     def row_to_datetime(self, row) -> datetime:
+        print("row", row)
         return datetime.strptime(f"{row.get('date')} {row.get('time')}", "%d.%m.%Y %H.%M.%S:%f")
 
     def get_key_by_row(self, row):

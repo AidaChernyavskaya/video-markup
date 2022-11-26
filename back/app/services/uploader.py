@@ -9,7 +9,7 @@ class BaseUploader(ABC):
     async def upload(self, file: UploadFile) -> str:
         if file.content_type != self.get_content_type():
             raise HTTPException(status_code=400, detail="Incorrect file format")
-        filename = f'/media/{self.get_path_prefix()}/{uuid.uuid4()}.mp4'
+        filename = f'/media/{self.get_path_prefix()}/{uuid.uuid4()}.{self.get_file_format()}'
         async with aiofiles.open(filename, 'wb') as out_file:
             content = await file.read()
             await out_file.write(content)
