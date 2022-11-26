@@ -13,5 +13,8 @@ function init_events_handlers(){
         updateFlagState();
         console.log(flag)
     })
+}
 
+function init_events_handlers_main_page(){
+    document.getElementById('btnAdd').onclick = showFormSection;
 }
