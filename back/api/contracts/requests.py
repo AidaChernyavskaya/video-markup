@@ -1,7 +1,5 @@
-from pydantic import BaseModel
+from app.entries import RecordCreate
 
 
-class RecordCreate(BaseModel):
-    title: str
-    video: str
-    periods: str
+class RecordCreateRequest(RecordCreate):
+    pass

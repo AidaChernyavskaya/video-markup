@@ -12,7 +12,24 @@ class PeriodsProcessor:
         tmp = self.counting_datetime(pandas.read_csv(csv_path))
         result = self.merge_intervals(tmp)
         duration = tmp[-1].get('real_time') - tmp[0].get('real_time')
-        return self.do_pagintion(result, duration)
+        paginated = self.do_pagintion(result, duration)
+
+        periods = []
+        for i in paginated:
+            emotions = []
+            for emotion in i.get('emotions'):
+                emotions.append(entries.Emotion(
+                    start=emotion.get('start'),
+                    finish=emotion.get('finish'),
+                    number=emotion.get('number'),
+                    value=emotion.get('value')
+                ))
+            periods.append(entries.Period(
+                start=i.get('start'),
+                finish=i.get('finish'),
+                emotions=emotions
+            ))
+        return periods
 
     def merge_intervals(self, data):
         result = []

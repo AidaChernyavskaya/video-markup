@@ -1,19 +1,11 @@
-from datetime import datetime
+from typing import List
+
 from pydantic import BaseModel
+from app.entries import RecordPreview, Record
 
 
-class RecordPreview(BaseModel):
-    id: int
-    title: str
-    created_at: datetime
-
-
-class Record(BaseModel):
-    id: int
-    title: str
-    video: str
-    periods: dict
-    created_at: datetime
+RecordsPreviewsResponse = List[RecordPreview]
+RecordResponse = Record
 
 
 class LoadedFile(BaseModel):

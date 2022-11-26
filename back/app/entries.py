@@ -1,13 +1,7 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
-
-
-class RecordCreate(BaseModel):
-    title: str
-    video_path: str
-    csv_path: str
 
 
 class Emotion(BaseModel):
@@ -23,8 +17,20 @@ class Period(BaseModel):
     emotions: List[Emotion]
 
 
-class Record(BaseModel):
+class RecordCreate(BaseModel):
+    title: str
+    video_path: str
+    csv_path: str
+
+
+class RecordPreview(BaseModel):
     id: int
+    title: str
+    created_at: datetime
+
+
+class Record(BaseModel):
+    id: Optional[int]
     title: str
     video: str
     periods: List[Period]
