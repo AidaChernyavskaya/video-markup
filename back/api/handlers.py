@@ -7,6 +7,7 @@ from fastapi import APIRouter, UploadFile, File
 from api.contracts import responses, requests
 from app.repo.records import RecordRepo
 from app.services.records.create import RecordCreator
+from app.services.records.getter import RecordGetter
 from app.services.records.listing import RecordListing
 from app.services.records.periods.processor import PeriodsProcessor
 from app.services.uploader import VideoUploader, CSVUploader
@@ -32,13 +33,8 @@ async def get_records_list():
     summary="Получить запись",
 )
 async def get_record(record_id: int):
-    return {
-        "id": 1,
-        "title": "Пациент Пеунов В.В. - депрессия",
-        "video": "video_url",
-        "periods": {},
-        "created_at": datetime.now()
-    }
+    getter = RecordGetter(repo=RecordRepo(collection=MongoWrapper().get_collection()))
+    return await getter.get(record_id)
 
 
 @records_router.post(

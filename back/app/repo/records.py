@@ -10,8 +10,8 @@ class RecordRepo:
     async def create(self, record: entries.Record):
         entry = record.dict()
         entry["_id"] = await self.get_id()
-        await self.collection.insert_one(entry)
-        record.id = entry["_id"]
+        entry.pop("id")
+        record.id = (await self.collection.insert_one(entry)).inserted_id
         return record
 
     async def get_id(self) -> int:
@@ -26,3 +26,7 @@ class RecordRepo:
                 created_at=record.get('created_at')
             ))
         return records
+
+    async def get(self, record_id) -> entries.Record:
+        record = await self.collection.find_one({"_id": record_id})
+        return entries.Record(id=record.pop("_id"), **record)
