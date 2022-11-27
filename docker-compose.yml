@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  back:
+    image: video-markup
+    container_name: video-markup
+    build:
+      context: ./back/
+      dockerfile: ./Docker.dockerfile
+    command: sh -c "python main.py"
+    working_dir: /apps/
+    env_file:
+      - .env
+    volumes:
+      - ./back/:/apps/
+      - ./media/:/media/
+      - ./front/:/front/
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongo_data:/data/db
+
+  nginx:
+    image: nginx:1.19.0-alpine
+    ports:
+      - "4020:80"
+    volumes:
+      - ./media:/media
+      - ./front:/front
+      - ./configs/nginx/:/etc/nginx/conf.d
+    depends_on:
+      - back
+
+
+volumes:
+  mongo_data:
+    name: mongo_data
