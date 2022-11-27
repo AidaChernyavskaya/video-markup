@@ -43,24 +43,26 @@ function drawRecordsData(record){
     dateColumnText.innerHTML = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     dateColumn.appendChild(dateColumnText);
 
-    createListIcons(row);
+    createListIcons(row, record);
 
 }
 
-function createListIcons(row){
+function createListIcons(row, record){
     let actionColumn = document.createElement("div");
     actionColumn.classList.add("col-1-of-6");
 
-    createIconImg("iconEdit", "../images/edit.png", "Edit icon", actionColumn);
-    createIconImg("iconDelete", "../images/delete.png", "Delete icon", actionColumn);
+    // createIconImg("iconEdit", "../images/edit.png", "Edit icon", actionColumn);
+    createIconImg(record, "../images/delete.png", "Delete icon", actionColumn);
 
     row.appendChild(actionColumn);
 }
 
-function createIconImg(id, src, alt, actionColumn){
+function createIconImg(record, src, alt, actionColumn){
     let iconList = document.createElement("div");
     iconList.classList.add("icon-list");
-    iconList.id = id;
+    iconList.onclick = () => {
+        deleteRecord(reloadCallback, record.id)
+    }
 
     let icon = document.createElement('img');
     icon.classList.add("icon-list__img");
@@ -206,11 +208,11 @@ function createNewRecord(){
 
     let title = document.getElementById('name').value;
 
-    createRecord(createdRecordCallback, video_path, csv_path, title);
+    createRecord(reloadCallback, video_path, csv_path, title);
 }
 
 
-function createdRecordCallback(data) {
+function reloadCallback(data) {
     location.reload();
 }
 

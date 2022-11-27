@@ -70,3 +70,13 @@ function createRecord(callback, video_path, csv_path, title) {
         success: callback
     });
 }
+
+
+function deleteRecord(callback, id){
+    $.ajax({
+        url: `/api/records/${id}/`,
+        method: 'DELETE',
+        dataType: 'json',
+        success: callback
+    });
+}
