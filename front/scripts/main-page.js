@@ -1,6 +1,7 @@
 let records = []
 
 
+
 function html_ready(){
     records = getRecordsData();
     records.forEach(record => {
@@ -125,7 +126,11 @@ function drawFormSection(){
     // btnForm.appendChild(document.getElementById("confirm"));
     // btnForm.appendChild(document.getElementById("cancel"));
 
-
+    $('.input-file input[type=file]').on('change', function(){
+        console.log("dwdew")
+        let file = this.files[0];
+        $(this).closest('.input-file').find('.input-file__text').html(file.name);
+    });
 }
 
 function drawLoadFileBtn(classes, container, text, id){
