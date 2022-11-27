@@ -33,6 +33,11 @@
     color: $color-grey-dark
   &__form
     font-size: 1.6rem
+  &__href
+    cursor: pointer
+    display: block
+    text-decoration: none
+    color: $color-black
 
 .icon-list
   cursor: pointer
@@ -131,6 +136,8 @@
     //letter-spacing: .2rem
     margin-right: 1rem
     white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
   &__btn
     position: relative
     display: inline-block

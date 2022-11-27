@@ -1,20 +1,21 @@
-let records = []
-
-
+let video_path = "";
+let csv_path = "";
+let videoLoaded = false;
+let csvLoaded = false;
 
 function html_ready(){
-    records = getRecordsData();
+    getRecordsData(loaded_records_callback);
+}
+
+function loaded_records_callback(records){
+    // records = getRecordsData();
+    console.log(records);
     records.forEach(record => {
         drawRecordsData(record);
-    })
+    });
     drawBtn("+ Добавить новую запись", "btnAdd",["btn", "btn__confirm"], ["row"]);
 
     init_events_handlers_main_page();
-}
-
-function getRecordsData(){
-    return [{"name": "Пациент Иванов И.И.", "date": "16.10.2022", "videoFile": "video_16_10_22.mp4", "dataFile": "data16_10.csv"},
-        {"name": "Пациент Roberts Mark", "date": "02.01.2022", "videoFile": "video_02_01_22.mp4", "dataFile": "data02_01.csv"}]
 }
 
 function drawRecordsData(record){
@@ -27,9 +28,10 @@ function drawRecordsData(record){
     let nameColumn = document.createElement("div");
     nameColumn.classList.add("col-3-of-6");
     row.appendChild(nameColumn);
-    let nameColumnText = document.createElement("p");
-    nameColumnText.classList.add("text");
-    nameColumnText.innerHTML = record.name;
+    let nameColumnText = document.createElement("a");
+    nameColumnText.classList.add("text", "text__href");
+    nameColumnText.href = `/records/${record.id}/`;
+    nameColumnText.innerHTML = record.title;
     nameColumn.appendChild(nameColumnText);
 
     let dateColumn = document.createElement("div");
@@ -37,7 +39,8 @@ function drawRecordsData(record){
     row.appendChild(dateColumn);
     let dateColumnText = document.createElement("p");
     dateColumnText.classList.add("text");
-    dateColumnText.innerHTML = record.date;
+    let date = new Date(record.created_at);
+    dateColumnText.innerHTML = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     dateColumn.appendChild(dateColumnText);
 
     createListIcons(row);
@@ -68,7 +71,7 @@ function createIconImg(id, src, alt, actionColumn){
     actionColumn.appendChild(iconList);
 }
 
-function drawBtn(text, id, classes, classList, btnForm){
+function drawBtn(text, id, classes, classList){
     let sectionList = document.getElementById('section-list');
 
     let row = document.createElement("div");
@@ -121,16 +124,19 @@ function drawFormSection(){
     btnForm.classList.add("btn__form", "row");
     sectionList.appendChild(btnForm);
 
-    btnForm.appendChild(drawBtn("Сохранить изменения", "confirm", ["btn", "btn__confirm"], []));
+    let createdButton = drawBtn("Создать запись", "confirm", ["btn", "btn__confirm"], [])
+    btnForm.appendChild(createdButton);
     btnForm.appendChild(drawBtn("Отмена", "cancel", ["btn", "btn__cancel"], ["margin-left-26px"]));
     // btnForm.appendChild(document.getElementById("confirm"));
     // btnForm.appendChild(document.getElementById("cancel"));
 
+    createdButton.onclick = createNewRecord;
     $('.input-file input[type=file]').on('change', function(){
         console.log("dwdew")
         let file = this.files[0];
         $(this).closest('.input-file').find('.input-file__text').html(file.name);
     });
+
 }
 
 function drawLoadFileBtn(classes, container, text, id){
@@ -160,7 +166,52 @@ function drawLoadFileBtn(classes, container, text, id){
     let btn = document.createElement("span");
     btn.classList.add("input-file__btn");
     btn.innerHTML = "Выберите файл"
+
     label.appendChild(btn);
+
+    if(id === 'video-file'){
+        $(`#${id}`).on('change', function(){
+            sendVideoPath(videoCallback, errorCallback);
+        });
+    } else {
+        $(`#${id}`).on('change', function(){
+            sendCSVPath(csvCallback, errorCallback);
+        });
+    }
+}
+
+function videoCallback(data) {
+    video_path = data.path;
+    videoLoaded = true;
+    console.log(data)
+}
+
+function csvCallback(data) {
+    csv_path = data.path;
+    csvLoaded = true;
+    console.log(data)
+}
+
+
+function errorCallback(data) {
+    alert("Некоректный формат файла")
+}
+
+function createNewRecord(){
+    if (!videoLoaded || !csvLoaded) {
+        alert("Сначала загрузите файлы")
+        return;
+    }
+
+
+    let title = document.getElementById('name').value;
+
+    createRecord(createdRecordCallback, video_path, csv_path, title);
+}
+
+
+function createdRecordCallback(data) {
+    location.reload();
 }
 
 document.addEventListener("DOMContentLoaded", html_ready);
