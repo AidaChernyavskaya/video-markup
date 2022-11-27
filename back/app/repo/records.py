@@ -30,3 +30,6 @@ class RecordRepo:
     async def get(self, record_id) -> entries.Record:
         record = await self.collection.find_one({"_id": record_id})
         return entries.Record(id=record.pop("_id"), **record)
+
+    async def delete(self, record_id):
+        await self.collection.delete_one({"_id": record_id})
