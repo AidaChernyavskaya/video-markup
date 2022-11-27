@@ -1,7 +1,3 @@
-
-from datetime import datetime
-from typing import List
-
 from fastapi import APIRouter, UploadFile, File
 
 from api.contracts import responses, requests
@@ -13,8 +9,9 @@ from app.services.records.periods.processor import PeriodsProcessor
 from app.services.uploader import VideoUploader, CSVUploader
 from core.mongo import MongoWrapper
 
-records_router = APIRouter(tags=["records"])
-loader_router = APIRouter(tags=["loader"])
+
+records_router = APIRouter(prefix="/api", tags=["records"])
+loader_router = APIRouter(prefix="/api", tags=["loader"])
 
 
 @records_router.get(
