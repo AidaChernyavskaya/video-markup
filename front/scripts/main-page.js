@@ -128,7 +128,8 @@ function drawFormSection(){
 
     let createdButton = drawBtn("Создать запись", "confirm", ["btn", "btn__confirm"], [])
     btnForm.appendChild(createdButton);
-    btnForm.appendChild(drawBtn("Отмена", "cancel", ["btn", "btn__cancel"], ["margin-left-26px"]));
+    let cancelButton = drawBtn("Отмена", "cancel", ["btn", "btn__cancel"], ["margin-left-26px"])
+    btnForm.appendChild(cancelButton);
     // btnForm.appendChild(document.getElementById("confirm"));
     // btnForm.appendChild(document.getElementById("cancel"));
 
@@ -139,6 +140,7 @@ function drawFormSection(){
         $(this).closest('.input-file').find('.input-file__text').html(file.name);
     });
 
+    cancelButton.onclick = reloadCallback;
 }
 
 function drawLoadFileBtn(classes, container, text, id){
@@ -194,7 +196,6 @@ function csvCallback(data) {
     console.log(data)
 }
 
-
 function errorCallback(data) {
     alert("Некоректный формат файла")
 }
@@ -210,7 +211,6 @@ function createNewRecord(){
 
     createRecord(reloadCallback, video_path, csv_path, title);
 }
-
 
 function reloadCallback(data) {
     location.reload();

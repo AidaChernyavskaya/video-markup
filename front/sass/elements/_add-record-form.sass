@@ -1,0 +1,78 @@
+
+.row__container
+  max-width: 84rem
+  background: linear-gradient(180deg, rgba(223, 246, 255, .5) 10%, rgba(71, 181, 255, .5) 75%)
+  border-radius: 1rem
+  padding-top: 2rem
+  padding-bottom: 2rem
+
+.form
+  &__group
+    margin-left: 1rem
+    margin-right: 1rem
+  &__input
+    padding: 1rem 0 1rem 1rem
+    background: $color-white
+    border: none
+    border-radius: 1rem
+    border-bottom: .3rem solid transparent
+    box-shadow: 0 .4rem .4rem rgba($color-black, 0.3)
+    color: $color-grey-dark
+    //letter-spacing: .2rem
+    &_name
+      width: 100%
+    &:focus
+      outline: none
+      border-bottom: .3rem solid #66D763
+    &:focus:invalid
+      border-bottom: .3rem solid #D76363
+
+
+.input-file
+  display: flex
+  flex-direction: row
+  position: relative
+  &__text
+    padding: 0 1rem
+    line-height: 4rem
+    text-align: left
+    height: 4rem
+    display: block
+    float: left
+    width: 80%
+    background: $color-white
+    border: none
+    border-radius: 1rem
+    box-shadow: 0 .4rem .4rem rgba($color-black, 0.3)
+    color: $color-grey-dark
+    //letter-spacing: .2rem
+    margin-right: 1rem
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
+  &__btn
+    position: relative
+    display: inline-block
+    cursor: pointer
+    vertical-align: middle
+    text-align: center
+    line-height: 2.2rem
+    height: 4rem
+    padding: 1rem 2rem
+    margin: 0
+    width: 20%
+    background-color: rgba($color-blue, .7)
+    text-decoration: none
+    font-weight: 700
+    color: $color-black
+    border-radius: 2rem
+    font-size: 1.4rem
+    letter-spacing: .1rem
+    transition: all .2s ease-out
+    &:hover
+      box-shadow: 0 .4rem .4rem rgba($color-black, 0.3)
+    &:active
+      box-shadow: inset .4rem .4rem .4rem rgba($color-black, 0.2)
+
+.video-file
+  display: none
