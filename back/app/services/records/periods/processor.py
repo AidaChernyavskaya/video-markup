@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 from typing import List
 
@@ -5,11 +6,13 @@ from app import entries
 import pandas
 import math
 import json
+import shutil
 
 
 class PeriodsProcessor:
     def process(self, csv_path: str) -> List[entries.Period]:
         df = pandas.read_csv(csv_path)
+        df.columns = ["date", "time", "em1", "em2", "em3", "em4", "em5", "em6"]
         tmp = self.counting_datetime(df)
         result = self.merge_intervals(tmp)
         duration = tmp[-1].get('real_time') - tmp[0].get('real_time')
@@ -55,7 +58,6 @@ class PeriodsProcessor:
         start_time = self.row_to_datetime(data[0])
         prev_time = self.row_to_datetime(data[0])
         paused_time = 0
-
         for row in data:
             current = self.row_to_datetime(row)
 
