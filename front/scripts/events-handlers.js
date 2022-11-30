@@ -17,5 +17,4 @@ function init_events_handlers(){
 
 function init_events_handlers_main_page(){
     document.getElementById('btnAdd').onclick = showFormSection;
-
 }

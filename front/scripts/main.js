@@ -1,10 +1,21 @@
 
-function html_ready() {
-    data = loadData();
+function gotRecordCallback(response) {
+    console.log(response);
+    data = response.periods;
     drawDataSection(data[current]);
     updateButtonState();
 
+    document.getElementById("video-player").src = response.video;
+}
+
+function getRecordId(){
+    console.log(document.location.href[document.location.href.length - 2]);
+    return document.location.href[document.location.href.length - 2];
+}
+
+function html_ready() {
     init_events_handlers();
+    getRecordById(getRecordId(), gotRecordCallback);
 }
 
 function toRight(){

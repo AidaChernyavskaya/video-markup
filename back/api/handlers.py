@@ -4,6 +4,7 @@ from api.contracts import responses, requests
 from app.repo.records import RecordRepo
 from app.services.records.create import RecordCreator
 from app.services.records.getter import RecordGetter
+from app.services.records.deleter import RecordDeleter
 from app.services.records.listing import RecordListing
 from app.services.records.periods.processor import PeriodsProcessor
 from app.services.uploader import VideoUploader, CSVUploader
@@ -45,6 +46,16 @@ async def create_record(record: requests.RecordCreateRequest):
         periods_processor=PeriodsProcessor()
     )
     return await creator.create(record=record)
+
+
+
+@records_router.delete(
+    "/records/{record_id}/",
+    summary="Удалить запись",
+)
+async def delete_record(record_id: int):
+    deleter = RecordDeleter(repo=RecordRepo(collection=MongoWrapper().get_collection()))
+    await deleter.delete(record_id)
 
 
 @loader_router.post(
