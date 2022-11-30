@@ -1,8 +1,6 @@
 FROM python:3.9.10-slim
 
 RUN mkdir /apps/
-RUN mkdir /media/video/
-RUN mkdir /media/csv/
 
 COPY . /apps/
 
