@@ -25,7 +25,9 @@ services:
       - mongo_data:/data/db
 
   nginx:
-    image: nginx:1.19.0-alpine
+    build:
+      context: ./configs/
+      dockerfile: ./Docker.nginx.dockerfile
     ports:
       - "4020:80"
     volumes:
