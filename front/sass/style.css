@@ -73,8 +73,9 @@ body {
 }
 .section-video {
   height: 52rem;
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 1rem;
   overflow: hidden;
+  padding-top: 0.5rem;
 }
 
 .video-player {
@@ -366,6 +367,10 @@ body {
   margin-left: 1rem;
   margin-right: 1rem;
 }
+.form__text {
+  font-weight: 400;
+  font-size: 1.4rem;
+}
 .form__input {
   padding: 1rem 0 1rem 1rem;
   background: #ffffff;
@@ -374,6 +379,7 @@ body {
   border-bottom: 0.3rem solid transparent;
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.3);
   color: #777777;
+  height: 4rem;
 }
 .form__input_name {
   width: 100%;
