@@ -113,7 +113,7 @@ function drawFormSection(){
 
     let nameArea = document.createElement("input");
     nameArea.type = "text";
-    nameArea.classList.add("form__input", "text", "form__input_name");
+    nameArea.classList.add("form__text", "form__input", "form__input_name");
     nameArea.id = "name";
     nameArea.placeholder = "Наименование";
     nameArea.setAttribute("required", "required");
@@ -158,7 +158,7 @@ function drawLoadFileBtn(classes, container, text, id){
     group.appendChild(label);
 
     let field = document.createElement("span");
-    field.classList.add("input-file__text", "text");
+    field.classList.add("input-file__text");
     label.appendChild(field);
 
     let addFile = document.createElement("input");

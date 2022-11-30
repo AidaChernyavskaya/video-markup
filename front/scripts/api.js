@@ -67,7 +67,9 @@ function createRecord(callback, video_path, csv_path, title) {
             csv_path: csv_path,
             title: title
         }),
-        success: callback
+        success: callback,
+        error: alert("Ошибка в создании записи \nПроверьте правильность указанных файлов")
+
     });
 }
 

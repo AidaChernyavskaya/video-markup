@@ -1,5 +1,5 @@
 from pydantic.class_validators import List
-
+from datetime import datetime
 from app import entries
 
 
@@ -15,7 +15,7 @@ class RecordRepo:
         return record
 
     async def get_id(self) -> int:
-        return await self.collection.count_documents({}) + 1
+        return int(round(datetime.now().timestamp()))
 
     async def get_list(self) -> List[entries.RecordPreview]:
         records = []
