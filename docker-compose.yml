@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   back:
@@ -20,7 +20,7 @@ services:
     restart: always
 
   mongodb:
-    image: mongo:latest
+    image: mongo:6.0
     volumes:
       - mongo_data:/data/db
 
