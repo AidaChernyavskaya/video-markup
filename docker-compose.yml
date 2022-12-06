@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.7'
 
 services:
   back:
@@ -31,13 +31,21 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    restart: always
     volumes:
       - ./media:/media
       - ./front:/front
       - ./configs/nginx/:/etc/nginx/conf.d
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
     depends_on:
       - back
 
+  certbot:
+    image: certbot/certbot:v2.0.0
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 volumes:
   mongo_data:
