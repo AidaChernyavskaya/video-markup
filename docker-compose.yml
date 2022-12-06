@@ -9,8 +9,6 @@ services:
       dockerfile: ./Docker.dockerfile
     command: sh -c "python main.py"
     working_dir: /apps/
-    env_file:
-      - .env
     volumes:
       - ./back/:/apps/
       - ./media/:/media/
@@ -31,7 +29,8 @@ services:
       context: ./configs/
       dockerfile: ./Docker.nginx.dockerfile
     ports:
-      - "4020:80"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./media:/media
       - ./front:/front
