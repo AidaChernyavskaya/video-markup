@@ -9,8 +9,8 @@ function gotRecordCallback(response) {
 }
 
 function getRecordId(){
-    console.log(document.location.href[document.location.href.length - 2]);
-    return document.location.href[document.location.href.length - 2];
+    console.log(document.location.href.split('/')[4]);
+    return document.location.href.split('/')[4];
 }
 
 function html_ready() {
