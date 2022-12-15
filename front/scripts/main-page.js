@@ -1,7 +1,11 @@
 let video_path = "";
 let csv_path = "";
+let recordNameAdded = false;
 let videoLoaded = false;
 let csvLoaded = false;
+let progressIdFlag = true;
+let btnDisableFlag = true;
+let btnCreate;
 
 function html_ready(){
     getRecordsData(loaded_records_callback);
@@ -133,14 +137,27 @@ function drawFormSection(){
     // btnForm.appendChild(document.getElementById("confirm"));
     // btnForm.appendChild(document.getElementById("cancel"));
 
+    checkButtonCondition(createdButton);
+    btnCreate = createdButton;
     createdButton.onclick = createNewRecord;
     $('.input-file input[type=file]').on('change', function(){
-        console.log("dwdew")
         let file = this.files[0];
         $(this).closest('.input-file').find('.input-file__text').html(file.name);
     });
 
     cancelButton.onclick = reloadCallback;
+}
+
+function checkButtonCondition(createdButton){
+    if (!videoLoaded || !csvLoaded){
+        createdButton.classList.add('disabled');
+        console.log('disable');
+    } else {
+        createdButton.classList.add('enabled');
+        createdButton.classList.remove('disabled');
+        console.log('enable00');
+    }
+
 }
 
 function drawLoadFileBtn(classes, container, text, id){
@@ -173,6 +190,26 @@ function drawLoadFileBtn(classes, container, text, id){
 
     label.appendChild(btn);
 
+    let progress = document.createElement("progress");
+    progress.value = 0;
+    progress.max = 100;
+    if (progressIdFlag) {
+        progress.id = 'progressBarVideo';
+        progressIdFlag = false;
+    } else {
+        progress.id = 'progressBarCsv';
+        progressIdFlag = true;
+    }
+    group.appendChild(progress);
+
+    let progressLabel = document.createElement('div');
+    progressLabel.classList.add('label');
+    let progressLabelText = document.createElement('p');
+    progressLabelText.classList.add('label__text');
+    progressLabelText.innerHTML = 'Процент загрузки';
+    progressLabel.appendChild(progressLabelText);
+    group.appendChild(progressLabel);
+
     if(id === 'video-file'){
         $(`#${id}`).on('change', function(){
             sendVideoPath(videoCallback, errorCallback);
@@ -187,13 +224,15 @@ function drawLoadFileBtn(classes, container, text, id){
 function videoCallback(data) {
     video_path = data.path;
     videoLoaded = true;
-    console.log(data)
+    console.log(data);
+    checkButtonCondition(btnCreate);
 }
 
 function csvCallback(data) {
     csv_path = data.path;
     csvLoaded = true;
-    console.log(data)
+    console.log(data);
+    checkButtonCondition(btnCreate);
 }
 
 function errorCallback(data) {
@@ -206,10 +245,16 @@ function createNewRecord(){
         return;
     }
 
-
     let title = document.getElementById('name').value;
 
-    createRecord(reloadCallback, video_path, csv_path, title);
+    let titleCopy = title;
+    if (titleCopy.trim().length >= 1){
+        createRecord(reloadCallback, video_path, csv_path, title);
+    } else {
+        alert('Введите название записи');
+    }
+
+    // createRecord(reloadCallback, video_path, csv_path, title);
 }
 
 function reloadCallback(data) {

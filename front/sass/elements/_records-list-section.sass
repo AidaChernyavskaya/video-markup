@@ -61,6 +61,8 @@
     box-shadow: 0 .4rem .4rem rgba($color-black, 0.3)
   &:active
     box-shadow: inset .4rem .4rem .4rem rgba($color-black, 0.2)
+  &:disabled
+    background-color: $color-grey-light
   &__cancel
     background-color: $color-grey-dark
   &__confirm
@@ -68,3 +70,15 @@
   &__form
     display: flex
     flex-direction: row
+
+.disabled
+  pointer-events: none
+  cursor: default
+  & a
+    background-color: $color-grey-light
+
+.enabled
+  pointer-events: auto
+  cursor: pointer
+  & a
+    background-color: $color-blue

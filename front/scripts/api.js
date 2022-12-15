@@ -27,6 +27,16 @@ function sendVideoPath(success_callback, error_callback){
     form_data.append('video', video_file.files[0]);
 
     $.ajax({
+        xhr: function() {
+            let xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener("progress", function(evt) {
+                if (evt.lengthComputable) {
+                    let percentComplete = (evt.loaded / evt.total) * 100;
+                    document.getElementById("progressBarVideo").value = Math.round(percentComplete);
+                }
+            }, false);
+            return xhr;
+        },
         url: '/api/upload/video/',
         method: 'POST',
         contentType: false,
@@ -45,6 +55,16 @@ function sendCSVPath(success_callback, error_callback){
     form_data.append('csv', video_file.files[0]);
 
     $.ajax({
+        xhr: function() {
+            let xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener("progress", function(evt) {
+                if (evt.lengthComputable) {
+                    let percentComplete = (evt.loaded / evt.total) * 100;
+                    document.getElementById("progressBarCsv").value = Math.round(percentComplete);
+                }
+            }, false);
+            return xhr;
+        },
         url: '/api/upload/csv/',
         method: 'POST',
         contentType: false,
